@@ -27,6 +27,7 @@
     "csv": "^6.3.11",
     "debounce": "^2.2.0",
     "framer-motion": "^12.19.2",
+    "fslightbox-react": "^1.8.0",
     "html-react-parser": "^5.2.5",
     "ky": "^1.8.1",
     "lucide-react": "^0.524.0",
@@ -39,6 +40,7 @@
     "react-hook-form": "^7.59.0",
     "sanitize-html": "^2.17.0",
     "slug": "^11.0.0",
+    "swiper": "^11.2.10",
     "tailwind-merge": "^3.3.1",
     "unlazy": "^0.12.4",
     "uuid": "^11.1.0",
@@ -46,6 +48,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/fslightbox-react": "^1.8.0",
     "@types/node": "^24.0.4",
     "@types/react": "^19",
     "@types/react-dom": "^19",

@@ -1,10 +1,12 @@
 import { routes } from "./routes";
 
 export const imageSources = {
-  classifiedPlaceholder: "https://car-dealer-website.s3.eu-west-1.amazonaws.com/next-s3-uploads/stock/classified-placeholder.jpeg"
+  classifiedPlaceholder: "https://mavlana-motors.s3.ap-southeast-1.amazonaws.com/uploads/classified-placeholder.jpeg",
+	carLinup: "https://mavlana-motors.s3.ap-southeast-1.amazonaws.com/uploads/car-lineup.jpeg",
+	featureSection: "https://mavlana-motors.s3.ap-southeast-1.amazonaws.com/uploads/feature-section.jpeg",
 }
 
-export const CLASSIFIEDS_PER_PAGE = 3
+export const CLASSIFIEDS_PER_PAGE = 4
 
 export const navLinks = [
 	{ id: 1, href: routes.home, label: "Home" },

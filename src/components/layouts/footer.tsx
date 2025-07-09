@@ -58,7 +58,7 @@ export const PublicFooter = () => {
 						<li key={link.id}>
 							<Link
 								href={link.href}
-								className="text-foreground hover:text-primary"
+								className="text-gray-600 hover:text-primary"
 							>
 								{link.label}
 							</Link>

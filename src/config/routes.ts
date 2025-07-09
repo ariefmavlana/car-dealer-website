@@ -8,7 +8,7 @@ export const routes = {
 	// success: (slug: string) => `/inventory/${slug}/success`,
 	favourites: "/favourites",
 	inventory: "/inventory",
-	// notAvailable: (slug: string) => `/inventory/${slug}/not-available`,
+	notAvailable: (slug: string) => `/inventory/${slug}/not-available`,
 	// signIn: "/auth/sign-in",
 	// challenge: "/auth/challenge",
 	// admin: {

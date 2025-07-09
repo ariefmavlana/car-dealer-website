@@ -2,7 +2,6 @@
 
 import { routes } from "@/config/routes"
 import { ClassifiedWithImages, MultiStepFormEnum } from "@/config/types"
-import Image from "next/image"
 import Link from "next/link"
 import { HTMLParser } from "../shared/html-parser"
 import { Cog, Fuel, GaugeCircle, Paintbrush2 } from "lucide-react"
@@ -12,6 +11,7 @@ import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { AnimatePresence, motion } from "framer-motion"
 import { formatColour, formatFuelType, formatNumber, formatOdometerUnit, formatPrice, formatTransmission } from "@/lib/utils"
+import { ImgixImage } from "../ui/imgix-image"
 
 interface ClassifiedCardProps {
   classified: ClassifiedWithImages
@@ -66,12 +66,12 @@ export const ClassifiedCard = (props: ClassifiedCardProps) => {
           className="bg-white relative rounded-md shadow-md overflow-hidden flex flex-col">
             <div className="aspect-3/2 relative">
               <Link href={routes.singleClassified(classified.slug)}>
-                <Image
+                <ImgixImage
                   placeholder="blur"
                   blurDataURL={classified.images[0]?.blurhash}
                   src={classified.images[0]?.src}
                   alt={classified.images[0]?.alt}
-                  className="object-cover"
+                  className="object-cover rounded-t-md"
                   fill={true}
                   quality={25}
                 />
