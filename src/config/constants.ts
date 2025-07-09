@@ -2,8 +2,8 @@ import { routes } from "./routes";
 
 export const imageSources = {
   classifiedPlaceholder: "https://mavlana-motors.s3.ap-southeast-1.amazonaws.com/uploads/classified-placeholder.jpeg",
-	carLinup: "https://mavlana-motors.s3.ap-southeast-1.amazonaws.com/uploads/car-lineup.jpeg",
-	featureSection: "https://mavlana-motors.s3.ap-southeast-1.amazonaws.com/uploads/feature-section.jpeg",
+	carLinup: "https://mavlana-motors.s3.ap-southeast-1.amazonaws.com/car-lineup.jpeg",
+	featureSection: "https://mavlana-motors.s3.ap-southeast-1.amazonaws.com/feature-section.jpeg",
 }
 
 export const CLASSIFIEDS_PER_PAGE = 4

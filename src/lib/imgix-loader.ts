@@ -17,5 +17,5 @@ export const imgixLoader = ({ src, width, height, quality }: LoaderProps) => {
 	const path = url.pathname
 	const params = url.searchParams.toString()
 
-	return `${env.NEXT_PUBLIC_IMGIX_URL}/${path}?${params}`
+	return `${env.NEXT_PUBLIC_IMGIX_URL}${path}?${params}`
 }

@@ -1,7 +1,9 @@
 import { ClassifiedFilterSchema } from "@/app/schemas/classified.schema";
 import { AwaitedPageProps } from "@/config/types";
-import { BodyType, ClassifiedStatus, Colour, CurrencyCode, FuelType, OdoUnit, Prisma, Transmission, ULEZCompliance } from "@prisma/client";
+import { BodyType, ClassifiedStatus, Colour, CurrencyCode, CustomerStatus, FuelType, OdoUnit, Prisma, Transmission, ULEZCompliance } from "@prisma/client";
 import { type ClassValue, clsx } from "clsx";
+import { format, parse } from "date-fns";
+import prettyBytes from "pretty-bytes";
 import { twMerge } from "tailwind-merge";
 
 /**
@@ -184,5 +186,104 @@ export const buildClassifiedFilterQuery = (searchParams: AwaitedPageProps['searc
 		}),
 
 		...mapParamsToFields
+	}
+}
+
+export const generateTimeOptions = () => {
+	const times = [];
+	const startHour = 8;
+	const endHour = 18;
+
+	for (let hour = startHour; hour < endHour; hour++) {
+		const date = new Date();
+		date.setDate(date.getDate() + 1);
+		date.setHours(hour);
+		date.setMinutes(0);
+
+		const formattedTime = date.toLocaleTimeString("en-GB", {
+			hour: "2-digit",
+			minute: "2-digit",
+			hour12: true,
+		});
+
+		times.push({
+			label: formattedTime,
+			value: formattedTime,
+		});
+	}
+	return times;
+};
+
+export const generateDateOptions = () => {
+	const today = new Date();
+	const dates = [];
+	for (let i = 0; i < 30; i++) {
+		const date = new Date(today);
+		date.setDate(today.getDate() + i);
+		dates.push({
+			label: format(date, "dd MMM yyyy"),
+			value: format(date, "dd MMM yyyy"),
+		});
+	}
+	return dates;
+};
+
+export const formatDate = (date: string, time: string) => {
+	const parsedDate = parse(date, "dd MMM yyyy", new Date());
+	const parsedTime = parse(time, "hh:mm aa", new Date());
+
+	parsedDate.setHours(parsedTime.getHours(), parsedTime.getMinutes(), 0, 0);
+
+	return parsedDate;
+};
+
+export function calculatePercentageChange(current: number, previous: number) {
+	if (previous === 0) return current > 0 ? 100 : current < 0 ? -100 : 0;
+
+	return ((current - previous) / Math.abs(previous)) * 100;
+}
+
+export const convertToMb = (bytes: number) => {
+	return prettyBytes(bytes, {
+		bits: false,
+		maximumFractionDigits: 1,
+		space: false,
+	});
+};
+
+export function generateYears(minYear: number, maxYear?: number): string[] {
+	const currentYear = maxYear ? maxYear : new Date().getFullYear();
+	const years: string[] = [];
+
+	for (let year = currentYear; year >= minYear; year--) {
+		years.push(`${year}`);
+	}
+
+	return years;
+}
+
+export function formatClassifiedStatus(status: ClassifiedStatus) {
+	switch (status) {
+		case ClassifiedStatus.LIVE:
+			return "Live";
+		case ClassifiedStatus.SOLD:
+			return "Sold";
+		case ClassifiedStatus.DRAFT:
+			return "Draft";
+	}
+}
+
+export function formatCustomerStatus(status: CustomerStatus) {
+	switch (status) {
+		case CustomerStatus.COLD:
+			return "Cold";
+		case CustomerStatus.CONTACTED:
+			return "Contacted";
+		case CustomerStatus.INTERESTED:
+			return "Interested";
+		case CustomerStatus.PURCHASED:
+			return "Purchased";
+		case CustomerStatus.SUBSCRIBER:
+			return "Subscriber";
 	}
 }

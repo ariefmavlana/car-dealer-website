@@ -54,3 +54,48 @@ export interface SidebarProps extends AwaitedPageProps {
     }
   }>,
 }
+
+export interface MultiStepFormComponentProps extends AwaitedPageProps {
+	classified: Prisma.ClassifiedGetPayload<{
+		include: {
+			make: true
+		}
+	}>
+}
+
+export interface ProgressArgs {
+	sent: number
+	total: number
+	uuid: string
+	percentage: number
+	key?: string
+}
+
+// export type ClassifiedImages = UpdateClassifiedType["images"]
+
+// export type ClassifiedKeys = keyof Pick<
+// 	Classified,
+// 	| "status"
+// 	| "title"
+// 	| "vrm"
+// 	| "id"
+// 	| "views"
+// 	| "year"
+// 	| "colour"
+// 	| "price"
+// 	| "createdAt"
+// >
+
+export type CustomerKeys = keyof Pick<
+	Prisma.CustomerGetPayload<{ include: { classified: true } }>,
+	| "id"
+	| "email"
+	| "mobile"
+	| "firstName"
+	| "lastName"
+	| "updatedAt"
+	| "createdAt"
+	| "status"
+	| "bookingDate"
+	| "classified"
+>
