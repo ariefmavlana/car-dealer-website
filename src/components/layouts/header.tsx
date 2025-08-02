@@ -8,10 +8,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
+import { auth } from "@auth";
+import { SignOutForm } from "../auth/sign-out-form";
 
 export const PublicHeader = async () => {
-	const sourceId = await getSourceId();
-	const favourites = await redis.get<Favourites>(sourceId ?? "");
+	const session = auth()
+	const sourceId = await getSourceId()
+	const favourites = await redis.get<Favourites>(sourceId ?? "")
 	return (
 		<header className="flex items-center justify-between h-16 px-4 bg-transparent gap-x-6">
 			<div className="flex items-center flex-1">
@@ -36,7 +39,12 @@ export const PublicHeader = async () => {
 					</Link>
 				))}
 			</nav>
-		
+		{session ? (
+			<div className="items-center md:flex gap-x-6 hidden">
+				<Link href={routes.admin.dashboard} className="text-foreground">Backoffice</Link>
+				<SignOutForm />
+			</div>
+		) : (
 				<Button
 					asChild
 					variant="ghost"
@@ -54,7 +62,7 @@ export const PublicHeader = async () => {
 						</div>
 					</Link>
 				</Button>
-
+			)}
 			<Sheet>
 				<SheetTrigger asChild>
 					<Button variant="link" size="icon" className="md:hidden border-none">

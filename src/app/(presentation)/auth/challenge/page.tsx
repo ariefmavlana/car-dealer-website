@@ -1,3 +1,6 @@
-export default function ChallengePage() {
-  return <div>ChallengePage</div>
+import { OtpForm } from "@/components/auth/otp-form";
+
+export default async function ChallengePage() {
+  
+    return <OtpForm />
 }
